@@ -1,0 +1,11 @@
+dist: trusty
+
+language: generic
+
+services:
+  - docker
+
+install:
+  - docker build -t mushroom-classifier .
+  - docker run -d -p 5000:5000 mushroom-classifier
+  - docker ps -a

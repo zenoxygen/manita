@@ -1,0 +1,20 @@
+.no-display {
+  display: none; }
+
+.content {
+  margin-bottom: 2em; }
+
+.upload-label {
+  margin-bottom: 1em; }
+
+.upload-image {
+  margin-bottom: 1em; }
+
+.analyze {
+  margin-bottom: 1em; }
+
+.result-label {
+  margin-bottom: 2em; }
+
+.chart-container {
+  margin-top: 2em; }

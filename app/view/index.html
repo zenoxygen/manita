@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="manita">
+
+    <title>manita</title>
+    <meta name="description" content="Mushroom identification using deep learning">
+    <meta name="keywords" content="manita, mushroom, mushrooms, shroom, shrooms, fungus, fungi, deep learning, machine learning, computer vision">
+    <meta name="author" content="zenoxygen">
+
+    <link rel="stylesheet" href="../static/css/spectre.min.css">
+    <link rel="stylesheet" href="../static/css/spectre-icons.min.css">
+    <link rel="stylesheet" href="../static/css/spectre-exp.min.css">
+    <link rel="stylesheet" href="../static/css/docs.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/favicon.ico">
+
+    <script src="../static/js/client.js"></script>
+    <script src="../static/js/Chart.js"></script>
+  </head>
+  <body>
+    <div class="section section-hero bg-gray">
+      <div class="grid-hero container grid-lg text-center" id="overview">
+        <div class="docs-brand">
+          <a class="docs-logo" href="/"><img src="../static/img/logo.png" alt="manita"><span class="text-dark"><h2>manita</h2></span></a>
+        </div>
+        <div class="col-8 col-mx-auto">
+          <a href="/"><img src="../static/img/manita.png" class="img-responsive" alt="manita"></a>
+        </div>
+        <h2><strong>Mushroom identification using deep learning</strong></h2>
+        <div class="content">
+          <div class="no-display">
+            <input id="file-input" class="no-display" type="file" name="file" accept="image/*" onchange="showPicked(this)">
+          </div>
+          <button class="btn btn-primary btn-lg" type="button" onclick="showPicker()">Upload image</button>
+          <div class="upload-label">
+            <label id="upload-label">No file chosen</label>
+          </div>
+          <div class="upload-image">
+            <img id="image-picked" class="no-display" alt="Chosen image" height="250">
+          </div>
+          <div class="analyze">
+            <button id="analyze-button" class="btn btn-primary btn-lg" type="button" onclick="analyze()">Analyze</button>
+          </div>
+          <div class="result-label">
+            <label id="result-label"></label>
+          </div>
+          <div id="chart-container">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section section-ads bg-gray">
+      <div class="docs-ad">
+        <div class="hide-md text-center">
+        </div>
+        <div class="show-md text-center">
+        </div>
+      </div>
+    </div>
+    <div class="section section-features bg-primary text-light text-center">
+      <div class="container grid-lg">
+        <h2>About</h2>
+        <div class="columns">
+          <div class="column col-10 col-sm-12 col-mx-auto text-left">
+            <p>
+              <strong>Manita</strong> is a free and open-source web application that allows you to quickly identify mushrooms.
+              <strong>
+                <ol>
+                  <li>Upload a mushroom image</li>
+                  <li>Start the analysis process</li>
+                  <li>Get more information about the prediction</li>
+                </ol>
+              </strong>
+            </p>
+            The model has been trained with <strong>more than 45,000 images</strong> and is able to classify <strong>200 mushroom species</strong> including:
+            <div class="columns">
+              <div class="column col-6 col-xs-12">
+                <ul>
+                  <li>Agaricus arvensis</li>
+                  <li>Agaricus augustus</li>
+                  <li>Agaricus bisporus</li>
+                  <li>Agaricus campestris</li>
+                  <li>Albatrellus confluens</li>
+                  <li>Albatrellus ovinus</li>
+                  <li>Amanita flavoconia</li>
+                  <li>Amanita fulva</li>
+                  <li>Amanita muscaria</li>
+                  <li>Amanita pantherina</li>
+                  <li>Amanita phalloides</li>
+                  <li>Amanita porphyria</li>
+                  <li>Amanita regalis</li>
+                  <li>Amanita rubescens</li>
+                  <li>Amanita virosa</li>
+                  <li>Apioperdon pyriforme</li>
+                  <li>Armillaria mellea</li>
+                  <li>Artomyces pyxidatus</li>
+                  <li>Auriscalpium vulgare</li>
+                  <li>Bankera fuligineoalba</li>
+                  <li>Beefsteak fungus</li>
+                  <li>Bolbitius titubans</li>
+                  <li>Boletus aereus</li>
+                  <li>Boletus badius</li>
+                  <li>Boletus edulis</li>
+                  <li>Boletus pinophilus</li>
+                  <li>Boletus satanas</li>
+                  <li>Boletus subtomentosus</li>
+                  <li>Bondarzewia berkeleyi</li>
+                  <li>Bovista plumbea</li>
+                  <li>Calocera viscosa</li>
+                  <li>Calocybe gambosa</li>
+                  <li>Calocybe persicolor</li>
+                  <li>Candelaria concolor</li>
+                  <li>Cantharellula umbonata</li>
+                  <li>Cantharellus cascadensis</li>
+                  <li>Cantharellus cibarius</li>
+                  <li>Cantharellus cinnabarinus</li>
+                  <li>Cantharellus formosus</li>
+                  <li>Cantharellus lateritius</li>
+                  <li>Cantharellus minor</li>
+                  <li>Cantharellus roseocanus</li>
+                  <li>Cantharellus subalbidus</li>
+                  <li>Cerioporus squamosus</li>
+                  <li>Chalciporus piperatus</li>
+                  <li>Chlorophyllum molybdites</li>
+                  <li>Clitocybe clavipes</li>
+                  <li>Clitocybe gibba</li>
+                  <li>Clitocybe nebularis</li>
+                  <li>Clitopilus prunulus</li>
+                  <li>Collybia dryophila</li>
+                  <li>Coltricia perennis</li>
+                  <li>Coprinellus disseminatus</li>
+                  <li>Coprinellus micaceus</li>
+                  <li>Coprinopsis atramentaria</li>
+                  <li>Coprinopsis lagopus</li>
+                  <li>Coprinus comatus</li>
+                  <li>Coprinus plicatilis</li>
+                  <li>Cortinarius alboviolaceus</li>
+                  <li>Cortinarius armillatus</li>
+                  <li>Cortinarius caperatus</li>
+                  <li>Cortinarius collinitus</li>
+                  <li>Cortinarius croceus</li>
+                  <li>Cortinarius laniger</li>
+                  <li>Cortinarius malicorius</li>
+                  <li>Cortinarius mucosus</li>
+                  <li>Cortinarius orellanus</li>
+                  <li>Cortinarius rubellus</li>
+                  <li>Cortinarius semisanguineus</li>
+                  <li>Cortinarius traganus</li>
+                  <li>Craterellus cornucopioides</li>
+                  <li>Craterellus tubaeformis</li>
+                  <li>Cystoderma amianthinum</li>
+                  <li>Dacrymyces chrysospermus</li>
+                  <li>Entoloma sericeum</li>
+                  <li>Evernia prunastri</li>
+                  <li>Flavoparmelia caperata</li>
+                  <li>Fomes fomentarius</li>
+                  <li>Fomitopsis betulina</li>
+                  <li>Fomitopsis pinicola</li>
+                  <li>Galerina marginata</li>
+                  <li>Ganoderma applanatum</li>
+                  <li>Gomphidius glutinosus</li>
+                  <li>Gomphus clavatus</li>
+                  <li>Gyromitra esculenta</li>
+                  <li>Gyromitra infula</li>
+                  <li>Hebeloma crustuliniforme</li>
+                  <li>Hebeloma mesophaeum</li>
+                  <li>Hericium erinaceus</li>
+                  <li>Hydnum repandum</li>
+                  <li>Hydnum rufescens</li>
+                  <li>Hygrophoropsis aurantiaca</li>
+                  <li>Hygrophorus camarophyllus</li>
+                  <li>Hygrophorus hypothejus</li>
+                  <li>Hypholoma capnoides</li>
+                  <li>Hypholoma fasciculare</li>
+                  <li>Hypholoma marginatum</li>
+                  <li>Inocybe lacera</li>
+                  <li>Kuehneromyces mutabilis</li>
+                  <li>Laccaria laccata</li>
+                </ul>
+              </div>
+              <div class="column col-6 col-xs-12">
+                <ul>
+                  <li>Lactarius camphoratus</li>
+                  <li>Lactarius deliciosus</li>
+                  <li>Lactarius deterrimus</li>
+                  <li>Lactarius helvus</li>
+                  <li>Lactarius lignyotus</li>
+                  <li>Lactarius mammosus</li>
+                  <li>Lactarius rufus</li>
+                  <li>Lactarius tabidus</li>
+                  <li>Lactarius torminosus</li>
+                  <li>Lactarius trivialis</li>
+                  <li>Lactarius turpis</li>
+                  <li>Lactarius volemus</li>
+                  <li>Laetiporus sulphureus</li>
+                  <li>Leccinum aurantiacum</li>
+                  <li>Leccinum scabrum</li>
+                  <li>Leccinum versipelle</li>
+                  <li>Lepista nuda</li>
+                  <li>Lobaria pulmonaria</li>
+                  <li>Lycoperdon excipuliforme</li>
+                  <li>Lycoperdon nigrescens</li>
+                  <li>Lycoperdon perlatum</li>
+                  <li>Lycoperdon pyriforme</li>
+                  <li>Macrolepiota procera</li>
+                  <li>Macrolepiota rachodes</li>
+                  <li>Marasmius oreades</li>
+                  <li>Megacollybia platyphylla</li>
+                  <li>Melanoleuca cognata</li>
+                  <li>Mitrophora semilibera</li>
+                  <li>Morchella angusticeps</li>
+                  <li>Morchella conica</li>
+                  <li>Morchella costata</li>
+                  <li>Morchella crassipes</li>
+                  <li>Morchella deliciosa</li>
+                  <li>Morchella dunensis</li>
+                  <li>Morchella elata</li>
+                  <li>Morchella esculenta</li>
+                  <li>Morchella hortensis</li>
+                  <li>Morchella rotunda</li>
+                  <li>Mycena galericulata</li>
+                  <li>Mycena pura</li>
+                  <li>Otidea onotica</li>
+                  <li>Parasola plicatilis</li>
+                  <li>Parmelia sulcata</li>
+                  <li>Paxillus atrotomentosus</li>
+                  <li>Paxillus involutus</li>
+                  <li>Phaeolus schweinitzii</li>
+                  <li>Phallus rubicundus</li>
+                  <li>Pholiota alnicola</li>
+                  <li>Pholiota aurivella</li>
+                  <li>Pholiota squarrosa</li>
+                  <li>Pleurotus eryngii</li>
+                  <li>Pleurotus ostreatus</li>
+                  <li>Pluteus cervinus</li>
+                  <li>Polyporus ciliatus</li>
+                  <li>Polyporus squamosus</li>
+                  <li>Psathyrella candolleana</li>
+                  <li>Psilocybe semilanceata</li>
+                  <li>Rhizina undulata</li>
+                  <li>Rickenella swartzii</li>
+                  <li>Russula acrifolia</li>
+                  <li>Russula aeruginea</li>
+                  <li>Russula aurea</li>
+                  <li>Russula claroflava</li>
+                  <li>Russula cyanoxantha</li>
+                  <li>Russula decolorans</li>
+                  <li>Russula emetica</li>
+                  <li>Russula obscura</li>
+                  <li>Russula paludosa</li>
+                  <li>Russula vesca</li>
+                  <li>Russula virescens</li>
+                  <li>Russula xerampelina</li>
+                  <li>Sarcodon squamosus</li>
+                  <li>Schizophyllum commune</li>
+                  <li>Scleroderma citrinum</li>
+                  <li>Stereum complicatum</li>
+                  <li>Stereum hirsutum</li>
+                  <li>Stereum ostrea</li>
+                  <li>Strobilurus esculentus</li>
+                  <li>Strobilurus stephanocystis</li>
+                  <li>Stropharia hornemannii</li>
+                  <li>Suillus bovinus</li>
+                  <li>Suillus grevillei</li>
+                  <li>Suillus luteus</li>
+                  <li>Suillus variegatus</li>
+                  <li>Trametes versicolor</li>
+                  <li>Tremella mesenterica</li>
+                  <li>Trichaptum biforme</li>
+                  <li>Tricholoma flavovirens</li>
+                  <li>Tricholoma focale</li>
+                  <li>Tricholoma saponaceum</li>
+                  <li>Tricholoma sejunctum</li>
+                  <li>Tricholomopsis decora</li>
+                  <li>Tricholomopsis rutilans</li>
+                  <li>Tuber aestivum</li>
+                  <li>Tuber borchii</li>
+                  <li>Tuber magnatum</li>
+                  <li>Tuber melanosporum</li>
+                  <li>Turbinellus floccosus</li>
+                  <li>Tylopilus felleus</li>
+                  <li>Xanthoria parietina</li>
+                </ul>
+              </div>
+            </div>
+          <p>
+            Many species are still missing and the accuracy rate is never satisfactory enough.</br>
+            The model is constantly improved to deliver better predictions.
+          </p>
+          </div>
+          <div class="column col-10 col-sm-12 col-mx-auto"><a class="btn btn-lg" href="https://github.com/zenoxygen/manita">
+            Discover the project on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section section-updates bg-gray">
+      <div class="container grid-lg">
+        <div class="columns">
+          <div class="column col-6 col-xs-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title h6"><strong>Follow me on Twitter</strong></div>
+              </div>
+              <div class="card-body">
+                For the latest updates: <a href="https://twitter.com/zenoxygen" target="_blank"><strong>@zenoxygen</strong></a>
+              </div>
+            </div>
+          </div>
+          <div class="column col-6 col-xs-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title h6">
+                  <strong>Donate with Bitcoin</strong>
+                </div>
+              </div>
+              <div class="card-body">
+                Support the development with a donation:
+                <div class="text-break">
+                  <span class="text-primary"><a href="https://www.blockchain.com/btc/address/1ART9a4YTm4F8dSpxX7jTvaGLKGgDqNYNZ" target="_blank"><strong>1ART9a4YTm4F8dSpxX7jTvaGLKGgDqNYNZ</strong></a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="section section-footer">
+      <div class="docs-footer container grid-lg" id="copyright">
+        <div class="text-break">
+          <p>
+            <a href="https://github.com/zenoxygen" target="_blank">GitHub</a> ·
+            <a href="https://twitter.com/zenoxygen" target="_blank">Twitter</a> ·
+            <a href="https://www.blockchain.com/btc/address/1ART9a4YTm4F8dSpxX7jTvaGLKGgDqNYNZ" target="_blank">BTC: 1ART9a4YTm4F8dSpxX7jTvaGLKGgDqNYNZ</a> ·
+            Version 0.1.0
+          </p>
+          <p>
+            Designed and built with &hearts; by <a href="https://twitter.com/zenoxygen" target="_blank">zenoxygen</a>.
+            Licensed under the <a href="https://github.com/zenoxygen/manita/blob/master/LICENSE" target="_blank">MIT License</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
