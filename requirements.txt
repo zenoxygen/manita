@@ -7,4 +7,4 @@ numpy==1.18.3
 starlette==0.13.3
 uvicorn==0.11.7
 python-multipart==0.0.5
-Pillow==8.1.1
+Pillow==8.2.0
